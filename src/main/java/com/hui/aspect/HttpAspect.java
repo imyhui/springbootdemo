@@ -1,7 +1,10 @@
 package com.hui.aspect;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,11 +14,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class HttpAspect {
 
+    //日志打印
+    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(HttpAspect.class);
+
     /**
      * 可先写方法再写注解，有自动补全
+     *定义切面代码复用
      */
-    @Before("execution(public * com.hui.controller.GirlController.girlList(..))")
+    @Pointcut("execution(public * com.hui.controller.GirlController.*(..))")
     public void log() {
-        System.out.println("拦截");
+    }
+
+    @Before("log()")
+    public void doBefor() {
+        logger.info("拦截前");
+    }
+
+    @After("log()")
+    public void doAfter() {
+        logger.info("拦截后");
     }
 }
