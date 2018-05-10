@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 /**
  * Created by yz on 18/5/5.
@@ -19,6 +20,7 @@ public class Girl {
 
     private String cupSize;
 
+    @Min(value = 18, message = "年龄小于18岁")
     private  Integer age;
 
     public Girl() {
