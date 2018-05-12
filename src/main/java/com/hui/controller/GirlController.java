@@ -35,10 +35,9 @@ public class GirlController {
      * @return
      */
     @PostMapping(value = "/girls")
-    public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult){
+    public Object girlAdd(@Valid Girl girl, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            return bindingResult.getFieldError().getDefaultMessage();
         }
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
