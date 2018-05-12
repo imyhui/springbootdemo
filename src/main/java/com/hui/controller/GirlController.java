@@ -1,8 +1,10 @@
 package com.hui.controller;
 
 import com.hui.domain.Girl;
+import com.hui.domain.Result;
 import com.hui.repository.GirlRepository;
 import com.hui.service.GirlService;
+import com.hui.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -35,14 +37,14 @@ public class GirlController {
      * @return
      */
     @PostMapping(value = "/girls")
-    public Object girlAdd(@Valid Girl girl, BindingResult bindingResult){
+    public Result<Girl> girlAdd(@Valid Girl girl, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return bindingResult.getFieldError().getDefaultMessage();
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
 
-        return girlRepository.save(girl);
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     //查询一个女生
