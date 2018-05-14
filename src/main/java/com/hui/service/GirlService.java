@@ -45,4 +45,8 @@ public class GirlService {
         // 大于16 加钱
 
     }
+
+    public Girl findOne(Integer id) {
+        return girlRepository.findById(id).orElse(null);
+    }
 }
