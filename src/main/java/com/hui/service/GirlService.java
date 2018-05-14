@@ -1,6 +1,7 @@
 package com.hui.service;
 
 import com.hui.domain.Girl;
+import com.hui.enums.ResultEnum;
 import com.hui.exception.GirlException;
 import com.hui.repository.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,10 @@ public class GirlService {
         Integer age = girl.getAge();
         if(age < 10) {
             //返回"小学"
-            throw new GirlException(100,"小学");
+            throw new GirlException(ResultEnum.PRIMARY_SCHOOL);
         } else if (age > 10 && age < 16) {
             //返回"初中"
-            throw new GirlException(101,"初中");
+            throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
         }
 
         // 大于16 加钱
